@@ -5,6 +5,23 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 import speech_recognition as sr
 
+from threading import Thread
+from flask import Flask
+
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Бот работает!"
+
+def run():
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host='0.0.0.0', port=port)
+
+def keep_alive():
+    t = Thread(target=run)
+    t.start()
+
 API_TOKEN = '8923805769:AAHnUQhHc4OZ4dinsC4pDEL3iaWidJ9nfCE'
 
 bot = Bot(token=API_TOKEN)
@@ -39,7 +56,10 @@ async def handle_voice(message: types.Message):
         await status_msg.edit_text("Не удалось распознать речь. Возможно, аудио слишком тихое или формат не поддерживается сервером.")
 
 async def main():
+    keep_alive()
     await dp.start_polling(bot)
 
 if __name__ == '__main__':
     asyncio.run(main())
+    
+    
