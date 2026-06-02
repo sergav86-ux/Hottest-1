@@ -22,7 +22,7 @@ def keep_alive():
     t = Thread(target=run)
     t.start()
 
-API_TOKEN = '8923805769:AAHnUQhHc4OZ4dinsC4pDEL3iaWidJ9nfCE'
+API_TOKEN = '8923805769:AAGdnmjaebZIiarRT1JtosNnH7tOhb21NtI'
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
